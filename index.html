@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -28,12 +29,151 @@
             background: var(--primary);
             color: var(--white);
             line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
+        /* Sidebar */
+        .nav-sidebar {
+            width: 260px;
+            background: rgba(11, 26, 51, 0.95);
+            border-right: 1px solid rgba(0, 196, 140, 0.15);
+            padding: 20px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            transition: width 0.3s;
+        }
+
+        .nav-sidebar.collapsed {
+            width: 70px;
+        }
+
+        .nav-logo {
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .nav-logo h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-section {
+            margin-bottom: 10px;
+        }
+
+        .nav-section-header {
+            padding: 10px 20px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 196, 140, 0.1);
+            color: var(--white);
+        }
+
+        .nav-item.active {
+            background: rgba(0, 196, 140, 0.15);
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        .nav-item-num {
+            font-size: 0.75rem;
+            color: var(--gray);
+            min-width: 20px;
+        }
+
+        .nav-toggle {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 101;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px 30px 30px 30px;
+            max-width: calc(100% - 260px);
+        }
+
+        .nav-sidebar.collapsed + .main-content {
+            margin-left: 70px;
+            max-width: calc(100% - 70px);
+        }
+
+        /* Tab Navigation Buttons */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            padding: 15px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 15px;
+        }
+
+        .tab-btn {
+            padding: 8px 14px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .tab-btn:hover {
+            background: rgba(0, 196, 140, 0.15);
+            border-color: var(--accent);
+        }
+
+        .tab-btn.active {
+            background: rgba(0, 196, 140, 0.25);
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         /* Header */
@@ -48,7 +188,7 @@
 
         .header h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 900;
             background: var(--gradient-1);
             -webkit-background-clip: text;
@@ -57,27 +197,28 @@
         }
 
         .header .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: rgba(255,255,255,0.8);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .date-badge {
             display: inline-block;
             background: rgba(0, 196, 140, 0.2);
             border: 1px solid var(--accent);
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 50px;
-            margin-right: 15px;
-            margin-bottom: 10px;
+            margin-right: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
+            font-size: 0.85rem;
         }
 
         /* KPI Grid */
         .kpi-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
             margin-bottom: 30px;
         }
 
@@ -85,7 +226,7 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -102,7 +243,7 @@
         }
 
         .kpi-value {
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
             font-family: 'Montserrat', sans-serif;
         }
@@ -110,6 +251,7 @@
         .kpi-label {
             color: var(--gray);
             margin-top: 5px;
+            font-size: 0.85rem;
         }
 
         /* Section styles */
@@ -117,16 +259,16 @@
             background: rgba(11, 26, 51, 0.7);
             border: 1px solid rgba(0, 196, 140, 0.15);
             border-radius: 30px;
-            padding: 30px;
-            margin-bottom: 30px;
+            padding: 25px;
+            margin-bottom: 25px;
             backdrop-filter: blur(10px);
         }
 
         .section-title {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
             border-bottom: 3px solid var(--accent);
             display: inline-block;
         }
@@ -141,19 +283,19 @@
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            gap: 20px;
         }
 
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            gap: 20px;
         }
 
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 15px;
         }
 
         /* Cards */
@@ -161,7 +303,7 @@
             background: rgba(255,255,255,0.03);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 20px;
-            padding: 20px;
+            padding: 18px;
             transition: transform 0.3s;
         }
 
@@ -172,9 +314,9 @@
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--accent);
         }
 
@@ -185,20 +327,21 @@
             background: rgba(255,255,255,0.02);
             border-radius: 15px;
             overflow: hidden;
+            font-size: 0.9rem;
         }
 
         .data-table th {
             background: rgba(0, 196, 140, 0.15);
             color: var(--accent);
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            padding: 15px 12px;
+            padding: 12px 10px;
             text-align: left;
         }
 
         .data-table td {
-            padding: 12px;
+            padding: 10px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -209,9 +352,9 @@
         /* Badges */
         .badge {
             display: inline-block;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 600;
         }
 
@@ -221,86 +364,42 @@
 
         /* Progress bars */
         .progress-bar {
-            height: 8px;
+            height: 6px;
             background: rgba(255,255,255,0.1);
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
-            margin: 10px 0;
+            margin: 8px 0;
         }
 
         .progress-fill {
             height: 100%;
             background: var(--gradient-1);
-            border-radius: 4px;
-        }
-
-        /* Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 30px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--accent), var(--accent-alt), var(--accent-purple));
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 30px;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -34px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            border: 3px solid var(--primary);
-        }
-
-        .timeline-date {
-            font-size: 0.85rem;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .timeline-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            border-radius: 3px;
         }
 
         /* Checklists */
         .checklist-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px;
+            gap: 10px;
+            padding: 10px;
             background: rgba(255,255,255,0.03);
-            border-radius: 10px;
-            margin-bottom: 8px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
         }
 
         .checklist-checkbox {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--accent);
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .checklist-checkbox.checked {
@@ -311,60 +410,20 @@
             content: '✓';
             color: var(--primary);
             font-weight: bold;
+            font-size: 12px;
         }
 
         .checklist-category {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 20px 0 10px;
-        }
-
-        /* Matrix */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: 120px repeat(7, 1fr);
-            gap: 8px;
-            overflow-x: auto;
-        }
-
-        .matrix-header {
-            padding: 12px;
-            background: rgba(0, 196, 140, 0.15);
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .matrix-cell {
-            padding: 12px 8px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 8px;
-            text-align: center;
-            font-size: 0.75rem;
-            min-height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .matrix-cell.highlight {
-            background: rgba(0, 196, 140, 0.15);
-            border: 1px solid var(--accent);
+            margin: 15px 0 8px;
         }
 
         /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
         .tab-btn {
-            padding: 10px 20px;
+            padding: 10px 18px;
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px;
@@ -372,6 +431,7 @@
             cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .tab-btn:hover {
@@ -401,89 +461,96 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
+            .nav-sidebar {
+                width: 70px;
+            }
+            .main-content {
+                margin-left: 70px;
+                max-width: calc(100% - 70px);
+            }
+            .header h1 { font-size: 1.8rem; }
             .grid-2, .grid-3, .grid-4 {
                 grid-template-columns: 1fr;
-            }
-            .matrix-grid {
-                grid-template-columns: 80px repeat(7, 1fr);
             }
         }
 
         /* Funnel */
         .funnel {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
         }
 
         .funnel-step {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .funnel-bar {
-            height: 50px;
+            height: 40px;
             background: linear-gradient(90deg, var(--accent), var(--accent-alt));
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 15px;
             font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .funnel-arrow {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--gray);
-            margin: 5px 0;
+            margin: 3px 0;
         }
 
         /* Kanban Board */
         .kanban-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
         .kanban-column {
             background: rgba(255,255,255,0.02);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 15px;
             border: 1px solid rgba(255,255,255,0.1);
         }
 
         .kanban-column h4 {
             color: var(--accent);
-            margin-bottom: 15px;
-            padding-bottom: 10px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 2px solid var(--accent);
+            font-size: 0.95rem;
         }
 
         .kanban-item {
             background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
             border-left: 3px solid var(--accent);
+            font-size: 0.85rem;
         }
 
         /* Lead progression chart */
         .chart-container {
             background: rgba(255,255,255,0.03);
-            padding: 25px;
+            padding: 20px;
             border-radius: 20px;
-            margin-top: 30px;
+            margin-top: 25px;
         }
 
         .chart-bars {
             display: flex;
             align-items: flex-end;
-            gap: 4px;
-            height: 200px;
+            gap: 3px;
+            height: 150px;
             background: rgba(0,0,0,0.2);
-            padding: 20px 10px;
-            border-radius: 15px;
+            padding: 15px 8px;
+            border-radius: 12px;
         }
 
         .chart-bar-wrapper {
@@ -496,33 +563,113 @@
         .chart-bar {
             width: 100%;
             background: linear-gradient(180deg, var(--accent), var(--accent-alt));
-            border-radius: 5px 5px 0 0;
+            border-radius: 4px 4px 0 0;
             transition: height 0.3s;
         }
 
         .chart-label {
+            font-size: 0.65rem;
+            margin-top: 4px;
+        }
+
+        /* Matrix */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: 100px repeat(7, 1fr);
+            gap: 6px;
+            overflow-x: auto;
+            font-size: 0.75rem;
+        }
+
+        .matrix-header {
+            padding: 10px;
+            background: rgba(0, 196, 140, 0.15);
+            border-radius: 6px;
             font-size: 0.7rem;
-            margin-top: 5px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .matrix-cell {
+            padding: 10px 6px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.7rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .matrix-cell.highlight {
+            background: rgba(0, 196, 140, 0.15);
+            border: 1px solid var(--accent);
         }
 
         /* Print styles */
         @media print {
             body { background: white; color: black; }
+            .nav-sidebar { display: none; }
+            .main-content { margin-left: 0; max-width: 100%; }
             .header { background: #f5f5f5; color: black; }
             .kpi-card { background: #f9f9f9; border: 1px solid #ddd; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Sidebar Navigation -->
+    <nav class="nav-sidebar" role="navigation" aria-label="Основное меню">
+        <div class="nav-logo">
+            <h2>📊 Маркетинг</h2>
+        </div>
+        
+        <div class="nav-section">
+            <div class="nav-item active" data-slide="overview" onclick="switchTab('overview')">
+                <span class="nav-item-num">1</span>📊 Обзор
+            </div>
+            <div class="nav-item" data-slide="shifts" onclick="switchTab('shifts')">
+                <span class="nav-item-num">2</span>📅 Смены
+            </div>
+            <div class="nav-item" data-slide="audience" onclick="switchTab('audience')">
+                <span class="nav-item-num">3</span>👥 Аудитории
+            </div>
+            <div class="nav-item" data-slide="channels" onclick="switchTab('channels')">
+                <span class="nav-item-num">4</span>📱 Каналы
+            </div>
+            <div class="nav-item" data-slide="calendar" onclick="switchTab('calendar')">
+                <span class="nav-item-num">5</span>🗓️ Календарь
+            </div>
+            <div class="nav-item" data-slide="content" onclick="switchTab('content')">
+                <span class="nav-item-num">6</span>📝 Контент
+            </div>
+            <div class="nav-item" data-slide="budget" onclick="switchTab('budget')">
+                <span class="nav-item-num">7</span>💰 Бюджет
+            </div>
+            <div class="nav-item" data-slide="checklist" onclick="switchTab('checklist')">
+                <span class="nav-item-num">8</span>✅ Чек-лист
+            </div>
+            <div class="nav-item" data-slide="offers" onclick="switchTab('offers')">
+                <span class="nav-item-num">9</span>🎯 Офферы
+            </div>
+            <div class="nav-item" data-slide="kanban" onclick="switchTab('kanban')">
+                <span class="nav-item-num">10</span>📋 Канбан
+            </div>
+        </div>
+    </nav>
+
+    <button class="nav-toggle" onclick="toggleSidebar()" aria-label="Переключить меню">☰</button>
+
+    <!-- Main Content -->
+    <main class="main-content">
         <!-- Header -->
         <div class="header">
             <h1>🏙️ ИнноСити 2026</h1>
             <p class="subtitle">Полный маркетинговый план продвижения летнего лагеря</p>
             <div>
-                <span class="date-badge">📅 Старт маркетинга: 9 марта 2026</span>
-                <span class="date-badge">🏕️ Старт лагеря: 7 июня 2026</span>
-                <span class="date-badge">⏱️ До старта: 90 дней</span>
+                <span class="date-badge">📅 Старт: 9 марта 2026</span>
+                <span class="date-badge">🏕️ Лагерь: 7 июня 2026</span>
+                <span class="date-badge">⏱️ 90 дней</span>
             </div>
         </div>
 
@@ -532,29 +679,25 @@
                 <div class="kpi-value" style="color: var(--accent);">300</div>
                 <div class="kpi-label">Заявок (цель)</div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">Текущий: 0</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-value" style="color: var(--accent-alt);">250</div>
-                <div class="kpi-label">Мест (цель)</div>
+                <div class="kpi-label">Мест</div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">Заполнено: 0</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-value" style="color: var(--accent-purple);">390К</div>
-                <div class="kpi-label">Бюджет (₽)</div>
+                <div class="kpi-label">Бюджет ₽</div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">Потрачено: 0</div>
             </div>
             <div class="kpi-card">
                 <div class="kpi-value" style="color: var(--accent-teal);">5</div>
                 <div class="kpi-label">Смен</div>
                 <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
-                <div style="font-size: 0.8rem; color: var(--gray); margin-top: 5px;">По 50 мест</div>
             </div>
         </div>
 
-        <!-- Main Navigation Tabs -->
+        <!-- Tab Navigation Buttons -->
         <div class="tabs">
             <div class="tab-btn active" onclick="switchTab('overview')">📊 Обзор</div>
             <div class="tab-btn" onclick="switchTab('shifts')">📅 Смены</div>
@@ -575,89 +718,49 @@
                 
                 <div class="grid-2">
                     <div>
-                        <h3 style="margin-bottom: 20px;">🎯 Целевые показатели</h3>
+                        <h3 style="margin-bottom: 15px;">🎯 Целевые показатели</h3>
                         <table class="data-table">
-                            <tr>
-                                <td>Заявок всего</td>
-                                <td><strong>300+</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Мест в лагере</td>
-                                <td><strong>250</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Конверсия (заявка → продажа)</td>
-                                <td><strong>15%</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Стоимость лида</td>
-                                <td><strong>< 300 руб</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Охват в соцсетях</td>
-                                <td><strong>500 000+</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Вовлечённость</td>
-                                <td><strong>5%+</strong></td>
-                            </tr>
+                            <tr><td>Заявок</td><td><strong>300+</strong></td></tr>
+                            <tr><td>Мест</td><td><strong>250</strong></td></tr>
+                            <tr><td>Конверсия</td><td><strong>15%</strong></td></tr>
+                            <tr><td>Стоимость лида</td><td><strong>< 300 ₽</strong></td></tr>
+                            <tr><td>Охват</td><td><strong>500 000+</strong></td></tr>
                         </table>
                     </div>
 
                     <div>
-                        <h3 style="margin-bottom: 20px;">📈 Маркетинговая воронка</h3>
+                        <h3 style="margin-bottom: 15px;">📈 Воронка</h3>
                         <div class="funnel">
                             <div class="funnel-step">
-                                <div class="funnel-bar" style="width: 100%; background: linear-gradient(90deg, var(--accent), #00A67D);">
-                                    <span>👁️ ВНИМАНИЕ</span>
-                                    <span>50,000</span>
+                                <div class="funnel-bar" style="width: 100%;">
+                                    <span>👁️ 50,000</span>
                                 </div>
                             </div>
                             <div class="funnel-arrow">↓</div>
                             <div class="funnel-step">
-                                <div class="funnel-bar" style="width: 70%; background: linear-gradient(90deg, var(--accent-alt), #E6A600);">
-                                    <span>📝 ЗАЯВКИ</span>
-                                    <span>300</span>
+                                <div class="funnel-bar" style="width: 70%;">
+                                    <span>📝 300</span>
                                 </div>
                             </div>
                             <div class="funnel-arrow">↓</div>
                             <div class="funnel-step">
-                                <div class="funnel-bar" style="width: 50%; background: linear-gradient(90deg, var(--accent-purple), #8B5CF6);">
-                                    <span>💳 ОПЛАТА</span>
-                                    <span>250</span>
+                                <div class="funnel-bar" style="width: 50%;">
+                                    <span>💳 250</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 15px;">📅 Ключевые даты</h3>
+                <div style="margin-top: 25px;">
+                    <h3 style="margin-bottom: 12px;">📅 Ключевые даты</h3>
                     <div class="grid-4">
-                        <div class="card">
-                            <div class="card-title">9 марта</div>
-                            <div>🎯 Старт маркетинга</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title">23 марта</div>
-                            <div>🏫 День открытых дверей</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title">1 апреля</div>
-                            <div>📢 Запуск Яндекс.Директ</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title">1 июня</div>
-                            <div>⏰ Финиш продаж</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title">7 июня</div>
-                            <div>🏕️ Старт 1-й смены</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-title">15 августа</div>
-                            <div>🎉 Финал 5-й смены</div>
-                        </div>
+                        <div class="card"><div class="card-title">9 мар</div>Старт</div>
+                        <div class="card"><div class="card-title">23 мар</div>День открытых</div>
+                        <div class="card"><div class="card-title">1 апр</div>Яндекс.Директ</div>
+                        <div class="card"><div class="card-title">1 июн</div>Финиш</div>
+                        <div class="card"><div class="card-title">7 июн</div>Старт лагеря</div>
+                        <div class="card"><div class="card-title">15 авг</div>Финал</div>
                     </div>
                 </div>
             </div>
@@ -670,74 +773,25 @@
                 
                 <table class="data-table">
                     <thead>
-                        <tr>
-                            <th>Смена</th>
-                            <th>Даты</th>
-                            <th>Мест</th>
-                            <th>Статус</th>
-                            <th>Промо-возможность</th>
-                        </tr>
+                        <tr><th>Смена</th><th>Даты</th><th>Мест</th><th>Статус</th></tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2); color: #00C48C;">Смена 1</span></td>
-                            <td>7-20 июня</td>
-                            <td>50</td>
-                            <td><span class="badge" style="background: rgba(255,184,0,0.2); color: #FFB800;">Запись</span></td>
-                            <td>Отзывы участников → для рекламы Смены 2</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2); color: #00C48C;">Смена 2</span></td>
-                            <td>21 июня - 3 июля</td>
-                            <td>50</td>
-                            <td><span class="badge" style="background: rgba(255,184,0,0.2); color: #FFB800;">Запись</span></td>
-                            <td>+отзывы Смены 1 → промо Смены 3</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2); color: #00C48C;">Смена 3</span></td>
-                            <td>5-18 июля</td>
-                            <td>50</td>
-                            <td><span class="badge" style="background: rgba(255,184,0,0.2); color: #FFB800;">Запись</span></td>
-                            <td>+отзывы Смены 2 → промо Смены 4</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2); color: #00C48C;">Смена 4</span></td>
-                            <td>19 июля - 1 авг</td>
-                            <td>50</td>
-                            <td><span class="badge" style="background: rgba(255,184,0,0.2); color: #FFB800;">Запись</span></td>
-                            <td>+отзывы Смены 3 → промо Смены 5</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(168,85,247,0.2); color: #A855F7;">Смена 5</span></td>
-                            <td>2-15 августа</td>
-                            <td>50</td>
-                            <td><span class="badge" style="background: rgba(168,85,247,0.2); color: #A855F7;">Запись</span></td>
-                            <td>Финал сезона + реферальная программа</td>
-                        </tr>
+                        <tr><td>Смена 1</td><td>7-20 июня</td><td>50</td><td><span class="badge badge-medium">Запись</span></td></tr>
+                        <tr><td>Смена 2</td><td>21 июня - 3 июля</td><td>50</td><td><span class="badge badge-medium">Запись</span></td></tr>
+                        <tr><td>Смена 3</td><td>5-18 июля</td><td>50</td><td><span class="badge badge-medium">Запись</span></td></tr>
+                        <tr><td>Смена 4</td><td>19 июля - 1 авг</td><td>50</td><td><span class="badge badge-medium">Запись</span></td></tr>
+                        <tr><td>Смена 5</td><td>2-15 августа</td><td>50</td><td><span class="badge badge-low">Запись</span></td></tr>
                     </tbody>
                 </table>
 
-                <div style="margin-top: 30px; background: rgba(0,196,140,0.1); padding: 25px; border-radius: 20px;">
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">🔗 Реферальная программа</h3>
+                <div style="margin-top: 20px; background: rgba(0,196,140,0.1); padding: 20px; border-radius: 15px;">
+                    <h3 style="color: var(--accent); margin-bottom: 12px;">🔗 Реферальная программа</h3>
                     <div class="grid-4">
-                        <div class="card" style="text-align: center;">
-                            <div style="font-size: 2rem;">👤</div>
-                            <div>Участник</div>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div style="font-size: 2rem;">→</div>
-                            <div>Приводит друга</div>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div style="font-size: 2rem;">💰</div>
-                            <div>Скидка 15%</div>
-                        </div>
-                        <div class="card" style="text-align: center;">
-                            <div style="font-size: 2rem;">🎁</div>
-                            <div>Бонус 2000₽</div>
-                        </div>
+                        <div class="card" style="text-align: center;"><div style="font-size: 1.5rem;">👤</div><div>Участник</div></div>
+                        <div class="card" style="text-align: center;"><div style="font-size: 1.5rem;">→</div><div>Приводит</div></div>
+                        <div class="card" style="text-align: center;"><div style="font-size: 1.5rem;">💰</div><div>Скидка 15%</div></div>
+                        <div class="card" style="text-align: center;"><div style="font-size: 1.5rem;">🎁</div><div>Бонус 2000₽</div></div>
                     </div>
-                    <p style="margin-top: 20px;">Цель: <strong>каждый 5-й участник приводит друга!</strong></p>
                 </div>
             </div>
         </div>
@@ -749,77 +803,32 @@
 
                 <div class="grid-2">
                     <div>
-                        <h3 style="color: var(--accent); margin-bottom: 20px;">🏫 Внутренняя аудитория</h3>
-                        
+                        <h3 style="color: var(--accent); margin-bottom: 15px;">🏫 Внутренняя</h3>
                         <div class="card">
-                            <h4>👨‍👩‍👧‍👦 Родители (текущие ученики)</h4>
-                            <p style="color: var(--gray);">Каналы: WhatsApp, Email, Родительские собрания</p>
-                            <span class="badge badge-high">Высокий приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">500 семей</span>
+                            <h4>👨‍👩‍👧‍👦 Родители (текущие)</h4>
+                            <p style="color: var(--gray); font-size: 0.85rem;">WhatsApp, Email, собрания</p>
+                            <span class="badge badge-high">Приоритет</span>
+                            <span class="badge" style="background: rgba(45,212,191,0.2);">500 семей</span>
                         </div>
-
-                        <div class="card" style="margin-top: 15px;">
+                        <div class="card" style="margin-top: 10px;">
                             <h4>🎒 Ученики 7-13 лет</h4>
-                            <p style="color: var(--gray);">Каналы: Школа, Соцсети</p>
-                            <span class="badge badge-high">Высокий приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">1000 детей</span>
-                        </div>
-
-                        <div class="card" style="margin-top: 15px;">
-                            <h4>👨‍🏫 Педагоги</h4>
-                            <p style="color: var(--gray);">Каналы: Педсовет, рекомендации</p>
-                            <span class="badge badge-medium">Средний приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">50 человек</span>
+                            <p style="color: var(--gray); font-size: 0.85rem;">Школа, соцсети</p>
+                            <span class="badge badge-high">Приоритет</span>
                         </div>
                     </div>
 
                     <div>
-                        <h3 style="color: var(--accent-alt); margin-bottom: 20px;">🌆 Внешняя аудитория</h3>
-                        
+                        <h3 style="color: var(--accent-alt); margin-bottom: 15px;">🌆 Внешняя</h3>
                         <div class="card">
                             <h4>🏘️ Родители (другие районы)</h4>
-                            <p style="color: var(--gray);">Каналы: ВКонтекст, Сарафан</p>
-                            <span class="badge badge-high">Высокий приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">2000 семей</span>
+                            <p style="color: var(--gray); font-size: 0.85rem;">ВКонтекст, сарафан</p>
+                            <span class="badge badge-high">Приоритет</span>
+                            <span class="badge" style="background: rgba(45,212,191,0.2);">2000 семей</span>
                         </div>
-
-                        <div class="card" style="margin-top: 15px;">
-                            <h4>⚽ Спортивные семьи</h4>
-                            <p style="color: var(--gray);">Каналы: Партнёрство со спортшколами</p>
-                            <span class="badge badge-medium">Средний приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">500 семей</span>
-                        </div>
-
-                        <div class="card" style="margin-top: 15px;">
+                        <div class="card" style="margin-top: 10px;">
                             <h4>💻 IT-семьи</h4>
-                            <p style="color: var(--gray);">Каналы: Таргет, профильные форумы</p>
-                            <span class="badge badge-medium">Средний приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">300 семей</span>
-                        </div>
-
-                        <div class="card" style="margin-top: 15px;">
-                            <h4>🎵 Творческие семьи</h4>
-                            <p style="color: var(--gray);">Каналы: Музыкальные школы, кружки</p>
-                            <span class="badge badge-medium">Средний приоритет</span>
-                            <span class="badge" style="background: rgba(45,212,191,0.2); color: #2DD4BF;">400 семей</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    <h3>🎯 Сегментация по возрасту детей</h3>
-                    <div class="grid-3" style="margin-top: 20px;">
-                        <div class="card">
-                            <h4>Младшие школьники (7-9 лет)</h4>
-                            <p style="color: var(--gray);">Интересы: игры, творчество, безопасность</p>
-                        </div>
-                        <div class="card">
-                            <h4>Старшие школьники (10-13 лет)</h4>
-                            <p style="color: var(--gray);">Интересы: общение, технологии, проекты</p>
-                        </div>
-                        <div class="card">
-                            <h4>Смешанные группы</h4>
-                            <p style="color: var(--gray);">Интересы: универсальные программы</p>
+                            <p style="color: var(--gray); font-size: 0.85rem;">Таргет, форумы</p>
+                            <span class="badge badge-medium">Средний</span>
                         </div>
                     </div>
                 </div>
@@ -831,95 +840,24 @@
             <div class="section">
                 <h2 class="section-title"><span>📱 Каналы продвижения</span></h2>
 
-                <h3 style="margin: 30px 0 15px;">🏫 Продвижение внутри школ</h3>
+                <h3 style="margin: 20px 0 12px;">🏫 Школы</h3>
                 <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Формат</th>
-                            <th>Канал</th>
-                            <th>Описание</th>
-                            <th>Период</th>
-                            <th>Ответственный</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Формат</th><th>Канал</th><th>Период</th></tr></thead>
                     <tbody>
-                        <tr><td>Личная встреча</td><td>Директор школы</td><td>Презентация лагеря</td><td>Март</td><td>CEO</td></tr>
-                        <tr><td>Презентация</td><td>Педсовет</td><td>Выступление 5-10 мин</td><td>Март</td><td>Marketing</td></tr>
-                        <tr><td>Листовка</td><td>Стенды</td><td>А4, QR-код</td><td>Март-Апрель</td><td>Design</td></tr>
-                        <tr><td>Буклет</td><td>Род. собрания</td><td>Для 1-4 классов</td><td>Март-Апрель</td><td>Вожатые</td></tr>
-                        <tr><td>Презентация</td><td>Классный час</td><td>Интерактив 15-20 мин</td><td>Апрель</td><td>Педагог</td></tr>
-                        <tr><td>Видео</td><td>Школьное ТВ</td><td>Ролик 1-3 мин</td><td>Апрель</td><td>Media</td></tr>
-                        <tr><td>Email</td><td>Рассылка школам</td><td>Письмо директорам</td><td>Март</td><td>Sales</td></tr>
-                        <tr><td>Квест</td><td>Внеурочка</td><td>Mini-quest по предпринимательству</td><td>Апрель</td><td>Педагог</td></tr>
-                        <tr><td>Мастер-класс</td><td>Школьные лагеря</td><td>По робототехнике</td><td>Май</td><td>Педагог</td></tr>
-                        <tr><td>Отзывы</td><td>Родители-выпускники</td><td>Видео-отзывы 30-60 сек</td><td>Апрель</td><td>Media</td></tr>
-                        <tr><td>Стенд</td><td>Выпускные</td><td>Баннер + листовки</td><td>Май</td><td>Design</td></tr>
+                        <tr><td>Презентация</td><td>Педсовет</td><td>Март</td></tr>
+                        <tr><td>Листовка</td><td>Стенды</td><td>Март-Апрель</td></tr>
+                        <tr><td>Буклет</td><td>Род. собрания</td><td>Март-Апрель</td></tr>
+                        <tr><td>Квест</td><td>Внеурочка</td><td>Апрель</td></tr>
                     </tbody>
                 </table>
 
-                <h3 style="margin: 30px 0 15px;">📱 Социальные сети</h3>
+                <h3 style="margin: 20px 0 12px;">📱 Соцсети</h3>
                 <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Платформа</th>
-                            <th>Формат</th>
-                            <th>Контент</th>
-                            <th>Частота</th>
-                            <th>KPI</th>
-                        </tr>
-                    </thead>
+                    <thead><tr><th>Платформа</th><th>Формат</th><th>Частота</th><th>KPI</th></tr></thead>
                     <tbody>
-                        <tr><td>VK</td><td>Пост-анонс</td><td>Открытие продаж</td><td>Еженедельно</td><td>5000+ просмотров</td></tr>
-                        <tr><td>VK</td><td>Карусель</td><td>5 фото: жизнь в лагере</td><td>Еженедельно</td><td>100+ сохранений</td></tr>
-                        <tr><td>VK</td><td>Видео</td><td>Виртуальный тур</td><td>2 раза/мес</td><td>10000+ просмотров</td></tr>
-                        <tr><td>VK</td><td>Сториз</td><td>Быстрые факты</td><td>Ежедневно</td><td>80%+ открытий</td></tr>
-                        <tr><td>VK</td><td>Reels/Клип</td><td>Динамичное видео с детьми</td><td>2 раза/нед</td><td>50000+ просмотров</td></tr>
-                        <tr><td>VK</td><td>Опрос</td><td>Какой лагерь выбрать?</td><td>Раз в месяц</td><td>500+ участников</td></tr>
-                        <tr><td>VK</td><td>Лонгрид</td><td>Почему ИнноСити лучший</td><td>Раз</td><td>30% дочитываний</td></tr>
-                        <tr><td>VK</td><td>Конкурс</td><td>Конкурс репостов</td><td>2 раза</td><td>1000+ репостов</td></tr>
-                        <tr><td>Telegram</td><td>Пост</td><td>Анонсы и новости</td><td>Ежедневно</td><td>2000+ просмотров</td></tr>
-                        <tr><td>Telegram</td><td>Канал</td><td>Полезный контент для родителей</td><td>Еженедельно</td><td>500+ подписчиков</td></tr>
-                        <tr><td>Telegram</td><td>Бот</td><td>Чат-бот с ответами</td><td>Март</td><td>100+ регистраций</td></tr>
-                        <tr><td>YouTube</td><td>Видео</td><td>Полный ролик о лагере</td><td>Раз</td><td>10000+ просмотров</td></tr>
-                        <tr><td>YouTube</td><td>Shorts</td><td>Короткие видео 60 сек</td><td>2 раза/нед</td><td>50000+ просмотров</td></tr>
-                        <tr><td>YouTube</td><td>Отзывы</td><td>Видео-отзывы родителей</td><td>2 раза/мес</td><td>3000+ просмотров</td></tr>
-                        <tr><td>YouTube</td><td>Прямой эфир</td><td>Q&A с организаторами</td><td>2 раза/мес</td><td>500+ зрителей</td></tr>
-                        <tr><td>Instagram</td><td>Пост</td><td>Фото-истории из лагеря</td><td>Ежедневно</td><td>500+ лайков</td></tr>
-                        <tr><td>Instagram</td><td>Reels</td><td>Короткие видео с детьми</td><td>Ежедневно</td><td>10000+ просмотров</td></tr>
-                    </tbody>
-                </table>
-
-                <h3 style="margin: 30px 0 15px;">🤝 Внешние площадки и партнёры</h3>
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Площадка</th>
-                            <th>Тип</th>
-                            <th>Формат</th>
-                            <th>Стоимость</th>
-                            <th>Период</th>
-                            <th>Эффект</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Яндекс.Путешествия</td><td>Маркетплейс</td><td>Карточка лагеря</td><td>15%</td><td>Март-Август</td><td>Бронирования</td></tr>
-                        <tr><td>Sutochno</td><td>Маркетплейс</td><td>Размещение</td><td>10%</td><td>Март-Август</td><td>Продажи</td></tr>
-                        <tr><td>Travel-line</td><td>Система брон.</td><td>Интеграция</td><td>10%</td><td>Март-Август</td><td>Автоматизация</td></tr>
-                        <tr><td>Mail.ru (Дети)</td><td>Портал</td><td>Баннер + статья</td><td>50 000 руб</td><td>Апрель</td><td>Охват 100к+</td></tr>
-                        <tr><td>Яндекс.Дети</td><td>Портал</td><td>Статья</td><td>Бесплатно</td><td>Апрель</td><td>Органика</td></tr>
-                        <tr><td>DetiMail.ru</td><td>Рассылка</td><td>Рассылка</td><td>30 000 руб</td><td>Апрель</td><td>50 000 подписчиков</td></tr>
-                        <tr><td>PapaMama.ru</td><td>Портал</td><td>Статья + баннер</td><td>25 000 руб</td><td>Апрель</td><td>Охват 50к</td></tr>
-                        <tr><td>Proektoria.online</td><td>Платформа</td><td>Вебинар</td><td>Бесплатно</td><td>Апрель</td><td>200+ регистраций</td></tr>
-                        <tr><td>Учи.ру</td><td>Платформа</td><td>Баннер</td><td>40 000 руб</td><td>Май</td><td>1 млн пользователей</td></tr>
-                        <tr><td>Яндекс.Учеба</td><td>Платформа</td><td>Статья</td><td>Бесплатно</td><td>Апрель</td><td>Органика</td></tr>
-                        <tr><td>Школьные лагеря</td><td>Партнёрство</td><td>Комиссия 10%</td><td>10%</td><td>Март</td><td>Привлечение</td></tr>
-                        <tr><td>Детские центры</td><td>Партнёрство</td><td>Скидка 5%</td><td>5%</td><td>Март</td><td>Привлечение</td></tr>
-                        <tr><td>Спортивные клубы</td><td>Партнёрство</td><td>Реклама</td><td>Бесплатно</td><td>Март</td><td>Охват</td></tr>
-                        <tr><td>Музыкальные школы</td><td>Партнёрство</td><td>Листовки</td><td>Бесплатно</td><td>Март</td><td>Охват</td></tr>
-                        <tr><td>ТЦ (семейные)</td><td>Офлайн</td><td>Стенд + листовки</td><td>30 000 руб/мес</td><td>Май-Июнь</td><td>1000+ контактов</td></tr>
-                        <tr><td>Парки</td><td>Офлайн</td><td>Промо-акции</td><td>20 000 руб</td><td>Май</td><td>5000+ охват</td></tr>
-                        <tr><td>Школьные ярмарки</td><td>Офлайн</td><td>Участие</td><td>10 000 руб</td><td>Апрель-Май</td><td>500+ контактов</td></tr>
-                        <tr><td>Детские мероприятия</td><td>Офлайн</td><td>Спонсорство</td><td>50 000 руб</td><td>Май</td><td>Охват</td></tr>
+                        <tr><td>VK</td><td>Пост, Карусель, Сториз</td><td>Ежедневно</td><td>5000+</td></tr>
+                        <tr><td>Telegram</td><td>Пост, Канал, Бот</td><td>Ежедневно</td><td>2000+</td></tr>
+                        <tr><td>YouTube</td><td>Видео, Shorts</td><td>2 раза/нед</td><td>10000+</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -928,122 +866,38 @@
         <!-- Tab: Calendar -->
         <div id="tab-calendar" class="tab-pane">
             <div class="section">
-                <h2 class="section-title"><span>🗓️ Недельный календарь</span></h2>
+                <h2 class="section-title"><span>🗓️ Календарь</span></h2>
 
-                <!-- Week 1 -->
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: var(--accent); margin-bottom: 15px;">📆 НЕДЕЛЯ 1: «Старт продаж» (9-15 марта)</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr><th>День</th><th>Соцсети</th><th>Школы</th><th>Цель</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ПН 9</td><td>Пост-анонс старта</td><td>Письма директорам</td><td>10 заявок</td></tr>
-                            <tr><td>ВТ 10</td><td>Сториз: факт о лагере</td><td>-</td><td>+10</td></tr>
-                            <tr><td>СР 11</td><td>5 причин выбрать</td><td>Листовки в школы</td><td>+5</td></tr>
-                            <tr><td>ЧТ 12</td><td>Сториз с FAQ</td><td>-</td><td>+10</td></tr>
-                            <tr><td>ПТ 13</td><td>Видео-приветствие</td><td>-</td><td>+5</td></tr>
-                            <tr><td>СБ 14</td><td>Конкурс</td><td>-</td><td>+5</td></tr>
-                            <tr><td>ВС 15</td><td>Итоги</td><td>-</td><td><strong>ИТОГО: 50</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
+                <h3 style="color: var(--accent); margin-bottom: 12px;">📆 Неделя 1: «Старт» (9-15 марта)</h3>
+                <table class="data-table">
+                    <thead><tr><th>День</th><th>Соцсети</th><th>Школы</th><th>Цель</th></tr></thead>
+                    <tbody>
+                        <tr><td>ПН 9</td><td>Пост-анонс</td><td>Письма директорам</td><td>10</td></tr>
+                        <tr><td>ВТ 10</td><td>Сториз</td><td>-</td><td>+10</td></tr>
+                        <tr><td>СР 11</td><td>5 причин</td><td>Листовки</td><td>+5</td></tr>
+                        <tr><td>ЧТ 12</td><td>FAQ</td><td>-</td><td>+10</td></tr>
+                        <tr><td>ПТ 13</td><td>Видео</td><td>-</td><td>+5</td></tr>
+                        <tr><td>СБ 14</td><td>Конкурс</td><td>-</td><td>+5</td></tr>
+                        <tr><td>ВС 15</td><td>Итоги</td><td>-</td><td><strong>ИТОГО: 50</strong></td></tr>
+                    </tbody>
+                </table>
 
-                <!-- Week 2 -->
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: var(--accent-alt); margin-bottom: 15px;">📆 НЕДЕЛЯ 2: «Разгон» (16-22 марта)</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr><th>День</th><th>Соцсети</th><th>Школы/События</th><th>Цель</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ПН 16</td><td>Посты + отзывы</td><td>-</td><td>+10</td></tr>
-                            <tr><td>ВТ 17</td><td>Сториз</td><td>Презентация директорам</td><td>-</td></tr>
-                            <tr><td>СР 18</td><td>Пост с кейсами</td><td>-</td><td>+15</td></tr>
-                            <tr><td>ЧТ 19</td><td>Вебинар Q&A</td><td>-</td><td>+10</td></tr>
-                            <tr><td>ПТ 20</td><td>Рассылка</td><td>-</td><td>+10</td></tr>
-                            <tr><td>СБ 21</td><td>Конкурс репостов</td><td>-</td><td>+5</td></tr>
-                            <tr><td>ВС 22</td><td>Аналитика</td><td>-</td><td><strong>ИТОГО: 80</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Week 3 -->
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: var(--accent-purple); margin-bottom: 15px;">📆 НЕДЕЛЯ 3: «Первые результаты» (23-29 марта)</h3>
-                    <table class="data-table">
-                        <thead>
-                            <tr><th>День</th><th>Соцсети</th><th>События</th><th>Цель</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>ПН 23</td><td>Отчёт</td><td>-</td><td>-</td></tr>
-                            <tr><td>ВТ 24</td><td>Посты</td><td>-</td><td>+15</td></tr>
-                            <tr><td>СР 25</td><td>Кейсы</td><td>Ярмарка вакансий</td><td>+10</td></tr>
-                            <tr><td>ЧТ 26</td><td>Рассылка "Осталось мест!"</td><td>-</td><td>+15</td></tr>
-                            <tr><td>ПТ 27</td><td>Видео</td><td>День открытых дверей</td><td>+10</td></tr>
-                            <tr><td>СБ 28</td><td>Опрос</td><td>Партнёры</td><td>+5</td></tr>
-                            <tr><td>ВС 29</td><td>Месячный отчёт</td><td>-</td><td><strong>ИТОГО: 120</strong></td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Week 4 -->
-                <div style="margin-bottom: 40px;">
-                    <h3 style="color: var(--accent-teal); margin-bottom: 15px;">📆 НЕДЕЛЯ 4: «Массовый охват» (30 мар - 5 апр)</h3>
-                    <div style="background: rgba(0,196,140,0.1); padding: 20px; border-radius: 15px;">
-                        <p><strong>🎯 Цель: 160 лидов</strong></p>
-                        <ul style="margin-left: 20px; margin-top: 10px;">
-                            <li>Усиление рекламного бюджета</li>
-                            <li>Запуск Яндекс.Директ</li>
-                            <li>Первые родительские собрания</li>
-                            <li>Массовая рассылка</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- LEAD PROGRESSION CHART - NEW ADDITION -->
                 <div class="chart-container">
-                    <h3 style="color: var(--accent); margin-bottom: 20px;">📈 Динамика заявок по неделям (50 → 300 за 12 недель)</h3>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; padding: 0 10px;">
-                        <span style="color: var(--gray);">Неделя</span>
-                        <span style="color: var(--gray);">1</span>
-                        <span style="color: var(--gray);">2</span>
-                        <span style="color: var(--gray);">3</span>
-                        <span style="color: var(--gray);">4</span>
-                        <span style="color: var(--gray);">5</span>
-                        <span style="color: var(--gray);">6</span>
-                        <span style="color: var(--gray);">7</span>
-                        <span style="color: var(--gray);">8</span>
-                        <span style="color: var(--gray);">9</span>
-                        <span style="color: var(--gray);">10</span>
-                        <span style="color: var(--gray);">11</span>
-                        <span style="color: var(--gray);">12</span>
-                    </div>
-                    
+                    <h3 style="color: var(--accent); margin-bottom: 15px;">📈 Динамика заявок (50 → 300 за 12 недель)</h3>
                     <div class="chart-bars">
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 33px;" title="50 заявок"></div><span class="chart-label">50</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 53px;" title="80 заявок"></div><span class="chart-label">80</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 80px;" title="120 заявок"></div><span class="chart-label">120</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 107px;" title="160 заявок"></div><span class="chart-label">160</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 133px;" title="200 заявок"></div><span class="chart-label">200</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 153px;" title="230 заявок"></div><span class="chart-label">230</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 173px;" title="260 заявок"></div><span class="chart-label">260</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 187px;" title="280 заявок"></div><span class="chart-label">280</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 193px;" title="290 заявок"></div><span class="chart-label">290</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 197px;" title="295 заявок"></div><span class="chart-label">295</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 199px;" title="298 заявок"></div><span class="chart-label">298</span></div>
-                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 200px;" title="300 заявок"></div><span class="chart-label">300</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 33px;"></div><span class="chart-label">50</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 53px;"></div><span class="chart-label">80</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 80px;"></div><span class="chart-label">120</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 107px;"></div><span class="chart-label">160</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 133px;"></div><span class="chart-label">200</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 153px;"></div><span class="chart-label">230</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 173px;"></div><span class="chart-label">260</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 187px;"></div><span class="chart-label">280</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 193px;"></div><span class="chart-label">290</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 197px;"></div><span class="chart-label">295</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 199px;"></div><span class="chart-label">298</span></div>
+                        <div class="chart-bar-wrapper"><div class="chart-bar" style="height: 200px;"></div><span class="chart-label">300</span></div>
                     </div>
-                    
-                    <div style="display: flex; justify-content: space-between; margin-top: 15px; color: var(--accent); font-weight: 600;">
-                        <span>Нед 1</span><span>Нед 2</span><span>Нед 3</span><span>Нед 4</span><span>Нед 5</span><span>Нед 6</span><span>Нед 7</span><span>Нед 8</span><span>Нед 9</span><span>Нед 10</span><span>Нед 11</span><span>Нед 12</span>
-                    </div>
-                    
-                    <p style="text-align: center; margin-top: 20px; color: var(--gray);">
-                        Целевой рост заявок: 50 → 300 за 12 недель<br>
-                        <strong>Ключевые вехи:</strong> 9 мар (50), 23 мар (120), 6 апр (180), 20 апр (220), 4 мая (250), 1 июня (300)
-                    </p>
                 </div>
             </div>
         </div>
@@ -1053,7 +907,6 @@
             <div class="section">
                 <h2 class="section-title"><span>📝 Контент-матрица</span></h2>
 
-                <!-- Content Matrix -->
                 <div class="matrix-grid">
                     <div class="matrix-header">Тип</div>
                     <div class="matrix-header">ПН</div>
@@ -1091,347 +944,42 @@
                     <div class="matrix-cell"></div>
                     <div class="matrix-cell"></div>
                 </div>
-
-                <div class="grid-3" style="margin-top: 30px;">
-                    <div class="card">
-                        <h4>📚 Экспертный контент</h4>
-                        <p style="color: var(--gray);">Цель: экспертиза, доверие</p>
-                        <p>Частота: <strong>3 раза/нед</strong></p>
-                        <p>Примеры: статьи о STEM, предпринимательстве, советы родителям</p>
-                        <p>CTA: "Записаться на консультацию"</p>
-                    </div>
-                    <div class="card">
-                        <h4>🎯 Вовлекающий контент</h4>
-                        <p style="color: var(--gray);">Цель: вовлечение, охват</p>
-                        <p>Частота: <strong>4 раза/нед</strong></p>
-                        <p>Примеры: опросы, конкурсы, видео с детьми</p>
-                        <p>CTA: "Подписаться", "Поделиться"</p>
-                    </div>
-                    <div class="card">
-                        <h4>💰 Продающий контент</h4>
-                        <p style="color: var(--gray);">Цель: конверсия</p>
-                        <p>Частота: <strong>2 раза/нед</strong></p>
-                        <p>Примеры: отзывы, спецпредложения, акции</p>
-                        <p>CTA: "Купить", "Записаться"</p>
-                    </div>
-                </div>
-
-                <div style="margin-top: 30px;">
-                    <h3>📱 Примеры постов по дням</h3>
-                    <table class="data-table">
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">ПН</span></td>
-                            <td>📚 Эксперт: "5 навыков, которые получит ваш ребёнок"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">ВТ</span></td>
-                            <td>🎯 Опрос: "Какой департамент подходит вашему ребёнку?"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">СР</span></td>
-                            <td>📚 Эксперт: "Как выбрать летний лагерь: 7 критериев"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">ЧТ</span></td>
-                            <td>⭐ Отзыв: "Мой сын вернулся другим человеком"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">ПТ</span></td>
-                            <td>🔥 Акция: "Раннее бронирование — скидка 15%!"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">СБ</span></td>
-                            <td>🎬 Видео: "День из жизни в ИнноСити"</td>
-                        </tr>
-                        <tr>
-                            <td><span class="badge" style="background: rgba(0,196,140,0.2);">ВС</span></td>
-                            <td>📖 Истории участников прошлых смен</td>
-                        </tr>
-                    </table>
-                </div>
             </div>
         </div>
 
         <!-- Tab: Budget -->
         <div id="tab-budget" class="tab-pane">
             <div class="section">
-                <h2 class="section-title"><span>💰 Бюджет маркетинга 2026</span></h2>
+                <h2 class="section-title"><span>💰 Бюджет</span></h2>
 
                 <div class="grid-2">
                     <div>
-                        <h3>По месяцам (основные статьи)</h3>
+                        <h3>По месяцам</h3>
                         <table class="data-table">
-                            <thead>
-                                <tr><th>Статья</th><th>Март</th><th>Апрель</th><th>Май</th><th>Июнь</th><th>Всего</th></tr>
-                            </thead>
+                            <thead><tr><th>Статья</th><th>Март</th><th>Апр</th><th>Май</th><th>Июн</th><th>Итого</th></tr></thead>
                             <tbody>
-                                <tr><td>Таргет VK</td><td>30,000</td><td>30,000</td><td>30,000</td><td>30,000</td><td>120,000</td></tr>
-                                <tr><td>Яндекс.Директ</td><td>20,000</td><td>20,000</td><td>20,000</td><td>20,000</td><td>80,000</td></tr>
-                                <tr><td>Печать/листовки</td><td>15,000</td><td>15,000</td><td>0</td><td>0</td><td>30,000</td></tr>
-                                <tr><td>Мерч/призы</td><td>5,000</td><td>5,000</td><td>20,000</td><td>0</td><td>30,000</td></tr>
-                                <tr><td>Резерв</td><td>0</td><td>15,000</td><td>15,000</td><td>0</td><td>30,000</td></tr>
-                                <tr><td style="font-weight: 700;">ИТОГО</td><td>70,000</td><td>85,000</td><td>85,000</td><td>50,000</td><td>290,000</td></tr>
+                                <tr><td>Таргет VK</td><td>30К</td><td>30К</td><td>30К</td><td>30К</td><td>120К</td></tr>
+                                <tr><td>Яндекс.Директ</td><td>20К</td><td>20К</td><td>20К</td><td>20К</td><td>80К</td></tr>
+                                <tr><td>Печать</td><td>15К</td><td>15К</td><td>-</td><td>-</td><td>30К</td></tr>
+                                <tr><td>Мерч</td><td>5К</td><td>5К</td><td>20К</td><td>-</td><td>30К</td></tr>
+                                <tr style="font-weight: 700;"><td>ИТОГО</td><td>70К</td><td>85К</td><td>85К</td><td>50К</td><td>290К</td></tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div>
-                        <h3>Распределение бюджета</h3>
-                        <div class="progress-bar-container" style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Таргет VK</span>
-                                <span>120,000 ₽ (31%)</span>
-                            </div>
+                        <h3>Распределение</h3>
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span>Таргет VK</span><span>120К (31%)</span></div>
                             <div class="progress-bar"><div class="progress-fill" style="width: 31%;"></div></div>
                         </div>
-                        <div class="progress-bar-container" style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Яндекс.Директ</span>
-                                <span>80,000 ₽ (21%)</span>
-                            </div>
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between; font-size: 0.85rem;"><span>Яндекс.Директ</span><span>80К (21%)</span></div>
                             <div class="progress-bar"><div class="progress-fill" style="width: 21%; background: var(--accent-alt);"></div></div>
                         </div>
-                        <div class="progress-bar-container" style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Печать/листовки</span>
-                                <span>30,000 ₽ (8%)</span>
-                            </div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 8%; background: var(--accent-purple);"></div></div>
-                        </div>
-                        <div class="progress-bar-container" style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Мерч/призы</span>
-                                <span>30,000 ₽ (8%)</span>
-                            </div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 8%; background: var(--accent-teal);"></div></div>
-                        </div>
-                        <div class="progress-bar-container" style="margin-bottom: 15px;">
-                            <div style="display: flex; justify-content: space-between;">
-                                <span>Резерв</span>
-                                <span>30,000 ₽ (8%)</span>
-                            </div>
-                            <div class="progress-bar"><div class="progress-fill" style="width: 8%; background: var(--gray);"></div></div>
-                        </div>
-
-                        <div style="margin-top: 30px; text-align: center;">
-                            <div style="font-size: 3rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                390,000 ₽
-                            </div>
-                            <div style="color: var(--gray);">Общий бюджет маркетинга</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- COMPLETE BUDGET TABLE - UPDATED WITH FULL DATA -->
-                <div style="margin-top: 30px;">
-                    <h3>Полный бюджет по всем каналам (Март - Август 2026)</h3>
-                    <div style="overflow-x: auto;">
-                        <table class="data-table" style="min-width: 1000px;">
-                            <thead>
-                                <tr>
-                                    <th>Канал</th>
-                                    <th>Март</th>
-                                    <th>Апрель</th>
-                                    <th>Май</th>
-                                    <th>Июнь</th>
-                                    <th>Июль</th>
-                                    <th>Август</th>
-                                    <th>Всего</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Таргетированная реклама</strong></td>
-                                    <td>50,000 ₽</td>
-                                    <td>80,000 ₽</td>
-                                    <td>100,000 ₽</td>
-                                    <td>80,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">390,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Контекстная реклама</strong></td>
-                                    <td>30,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>60,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">240,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>SMM (контент)</strong></td>
-                                    <td>20,000 ₽</td>
-                                    <td>25,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>25,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>15,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">135,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Партнёрские программы</strong></td>
-                                    <td>10,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>10,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">120,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Офлайн (ТЦ, мероприятия)</strong></td>
-                                    <td>0 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>60,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">190,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Маркетплейсы (комиссия)</strong></td>
-                                    <td>0 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>80,000 ₽</td>
-                                    <td>80,000 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">280,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Блогеры</strong></td>
-                                    <td>0 ₽</td>
-                                    <td>50,000 ₽</td>
-                                    <td>80,000 ₽</td>
-                                    <td>60,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>0 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">220,000 ₽</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>PR-мероприятия</strong></td>
-                                    <td>0 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>30,000 ₽</td>
-                                    <td>20,000 ₽</td>
-                                    <td>10,000 ₽</td>
-                                    <td>0 ₽</td>
-                                    <td style="color: var(--accent); font-weight: 700;">80,000 ₽</td>
-                                </tr>
-                                <tr style="background: rgba(0,196,140,0.1); font-weight: 800;">
-                                    <td><strong>ИТОГО</strong></td>
-                                    <td><strong>110,000 ₽</strong></td>
-                                    <td><strong>295,000 ₽</strong></td>
-                                    <td><strong>440,000 ₽</strong></td>
-                                    <td><strong>395,000 ₽</strong></td>
-                                    <td><strong>270,000 ₽</strong></td>
-                                    <td><strong>145,000 ₽</strong></td>
-                                    <td style="color: var(--accent); font-size: 1.2rem;"><strong>1,655,000 ₽</strong></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p style="margin-top: 15px; color: var(--gray); font-size: 0.9rem;">* Полный бюджет включает все маркетинговые активности с марта по август 2026</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tab: Offers -->
-        <div id="tab-offers" class="tab-pane">
-            <div class="section">
-                <h2 class="section-title"><span>🎯 Целевые аудитории и офферы</span></h2>
-
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Сегмент</th>
-                            <th>Возраст</th>
-                            <th>Интересы</th>
-                            <th>Боли</th>
-                            <th>Оффер</th>
-                            <th>Каналы</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Амбициозные родители</td>
-                            <td>30-45 лет</td>
-                            <td>Развитие, образование</td>
-                            <td>Скука летом, нехватка времени</td>
-                            <td>Лагерь + английский + проекты</td>
-                            <td>Таргет, блогеры</td>
-                        </tr>
-                        <tr>
-                            <td>IT-родители</td>
-                            <td>28-40 лет</td>
-                            <td>Технологии, STEM</td>
-                            <td>Хотят tech-образование</td>
-                            <td>IT-профили, 3D, роботы</td>
-                            <td>Форумы, Telegram</td>
-                        </tr>
-                        <tr>
-                            <td>Образованные семьи</td>
-                            <td>32-45 лет</td>
-                            <td>Языки, путешествия</td>
-                            <td>Качество образования</td>
-                            <td>Носители языка, сертификаты</td>
-                            <td>Email, блогеры</td>
-                        </tr>
-                        <tr>
-                            <td>Активные родители</td>
-                            <td>28-38 лет</td>
-                            <td>Спорт, здоровье</td>
-                            <td>Энергия детей</td>
-                            <td>Активности, командные игры</td>
-                            <td>Спортшколы, парки</td>
-                        </tr>
-                        <tr>
-                            <td>Экономные родители</td>
-                            <td>25-35 лет</td>
-                            <td>Цена/качество</td>
-                            <td>Бюджет</td>
-                            <td>Раннее бронирование -15%</td>
-                            <td>Таргет, рассылки</td>
-                        </tr>
-                        <tr>
-                            <td>Лояльные клиенты</td>
-                            <td>Любой</td>
-                            <td>Уже знают лагерь</td>
-                            <td>Не знают расписание</td>
-                            <td>Скидка 10% прошлым участникам</td>
-                            <td>Email, SMS</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 30px; background: rgba(0,196,140,0.1); padding: 25px; border-radius: 20px;">
-                    <h3 style="margin-bottom: 15px;">🎁 Акции и спецпредложения</h3>
-                    <div class="grid-3">
-                        <div class="card">
-                            <h4>👥 Приведи друга</h4>
-                            <p>Скидка 15% обоим</p>
-                        </div>
-                        <div class="card">
-                            <h4>📅 Раннее бронирование</h4>
-                            <p>Скидка 10% до конца месяца</p>
-                        </div>
-                        <div class="card">
-                            <h4>👨‍👩‍👧‍👦 Два ребёнка</h4>
-                            <p>Скидка 20% на второго</p>
-                        </div>
-                        <div class="card">
-                            <h4>💳 Рассрочка</h4>
-                            <p>Оплата частями без %</p>
-                        </div>
-                        <div class="card">
-                            <h4>🎓 Школьные партнёры</h4>
-                            <p>Скидка 5% для учеников</p>
-                        </div>
-                        <div class="card">
-                            <h4>📞 Личная консультация</h4>
-                            <p>Бесплатно при заявке</p>
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">390,000 ₽</div>
+                            <div style="color: var(--gray);">Общий бюджет</div>
                         </div>
                     </div>
                 </div>
@@ -1441,259 +989,98 @@
         <!-- Tab: Checklist -->
         <div id="tab-checklist" class="tab-pane">
             <div class="section">
-                <h2 class="section-title"><span>✅ Чек-лист готовности к старту</span></h2>
+                <h2 class="section-title"><span>✅ Чек-лист</span></h2>
 
                 <div class="grid-2">
                     <div>
                         <div class="checklist-category">📋 База и контакты</div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>База email родителей (2000+)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>База WhatsApp/Telegram (1500+)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Классные чаты (20+)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Контакты школ района (15+)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Контакты директоров школ</span>
-                        </div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>База email (2000+)</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>База WhatsApp (1500+)</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>Контакты школ (15+)</span></div>
 
-                        <div class="checklist-category" style="margin-top: 30px;">🎨 Материалы</div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div>
-                            <span>✅ Сайт работает (index.html)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div>
-                            <span>✅ Тест-опросник (gloria-quiz.html)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div>
-                            <span>✅ Игра (gloria-game.html)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>PDF-буклет (готов к печати)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Листовки (готовы к печати)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Видео-презентация (5-7 мин)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Видео-анонс (30-60 сек)</span>
-                        </div>
+                        <div class="checklist-category">🎨 Материалы</div>
+                        <div class="checklist-item"><div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div><span>✅ Сайт (index.html)</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div><span>✅ Тест (gloria-quiz.html)</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox checked" onclick="this.classList.toggle('checked')"></div><span>✅ Игра (gloria-game.html)</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>PDF-буклет</span></div>
                     </div>
 
                     <div>
                         <div class="checklist-category">📱 Соцсети</div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>ВКонтакте — создана и оформлена</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Telegram-канал — создан</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Таргет настроен и запущен</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Контент-план на 2 недели вперёд</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Рекламные кабинеты настроены</span>
-                        </div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>ВКонтакте</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>Telegram</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>Таргет настроен</span></div>
 
-                        <div class="checklist-category" style="margin-top: 30px;">👥 Команда</div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>SMM-менеджер</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Ответственный за звонки</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Ответственный за email-рассылки</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>CRM/таблица для заявок</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Ответственный за мероприятия</span>
-                        </div>
+                        <div class="checklist-category">👥 Команда</div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>SMM-менеджер</span></div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>CRM для заявок</span></div>
 
-                        <div class="checklist-category" style="margin-top: 30px;">💰 Бюджет</div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Бюджет утверждён (390,000 ₽)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div>
-                            <span>Оплата за первый месяц</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-top: 30px; background: rgba(0,196,140,0.1); padding: 25px; border-radius: 20px;">
-                    <h3 style="color: var(--accent);">🚀 Первые 24 часа (9 марта)</h3>
-                    <div class="grid-3" style="margin-top: 20px;">
-                        <div>
-                            <h4>⏰ Первые 4 часа</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>✓ Проверить работу сайта</li>
-                                <li>✓ Проверить работу теста</li>
-                                <li>✓ Написать 3 поста</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>⏰ 4-12 часов</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>✓ Создать/оформить группу ВК</li>
-                                <li>✓ Настроить таргет</li>
-                                <li>✓ Найти базу email</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>⏰ 24 часа</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>✓ Запустить первый пост</li>
-                                <li>✓ Отправить первую рассылку</li>
-                                <li>✓ Запустить первый день таргета</li>
-                            </ul>
-                        </div>
+                        <div class="checklist-category">💰 Бюджет</div>
+                        <div class="checklist-item"><div class="checklist-checkbox" onclick="this.classList.toggle('checked')"></div><span>Бюджет утверждён</span></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab: Kanban - NEW ADDITION from visual marketing plan -->
+        <!-- Tab: Offers -->
+        <div id="tab-offers" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>🎯 Офферы</span></h2>
+
+                <table class="data-table">
+                    <thead><tr><th>Сегмент</th><th>Интересы</th><th>Боли</th><th>Оффер</th></tr></thead>
+                    <tbody>
+                        <tr><td>Амбициозные</td><td>Развитие</td><td>Скука летом</td><td>Лагерь + английский</td></tr>
+                        <tr><td>IT-родители</td><td>STEM</td><td>Tech-образование</td><td>IT-профили, роботы</td></tr>
+                        <tr><td>Образованные</td><td>Языки</td><td>Качество</td><td>Носители языка</td></tr>
+                        <tr><td>Экономные</td><td>Цена/качество</td><td>Бюджет</td><td>Раннее -15%</td></tr>
+                    </tbody>
+                </table>
+
+                <div style="margin-top: 20px; background: rgba(0,196,140,0.1); padding: 20px; border-radius: 15px;">
+                    <h3 style="margin-bottom: 12px;">🎁 Акции</h3>
+                    <div class="grid-3">
+                        <div class="card"><h4>👥 Приведи друга</h4><p>Скидка 15%</p></div>
+                        <div class="card"><h4>📅 Раннее бронирование</h4><p>Скидка 10%</p></div>
+                        <div class="card"><h4>💳 Рассрочка</h4><p>Без %</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Kanban -->
         <div id="tab-kanban" class="tab-pane">
             <div class="section">
-                <h2 class="section-title"><span>📋 Канбан: Прогресс задач</span></h2>
+                <h2 class="section-title"><span>📋 Канбан</span></h2>
 
                 <div class="kanban-container">
-                    <!-- TODO Column -->
                     <div class="kanban-column">
-                        <h4>📋 TODO (Нужно сделать)</h4>
-                        <div class="kanban-item">🎯 Договориться с 10 школами</div>
-                        <div class="kanban-item">🎯 Подготовить промо-ролик</div>
-                        <div class="kanban-item">🎯 Найти партнёров</div>
-                        <div class="kanban-item">🎯 Подготовить мерч</div>
-                        <div class="kanban-item">📊 Настроить CRM</div>
+                        <h4>📋 TODO</h4>
+                        <div class="kanban-item">🎯 10 школ</div>
+                        <div class="kanban-item">🎯 Промо-ролик</div>
+                        <div class="kanban-item">🎯 Партнёры</div>
+                        <div class="kanban-item">📊 CRM</div>
                     </div>
 
-                    <!-- IN PROGRESS Column -->
                     <div class="kanban-column">
-                        <h4>🚧 IN PROGRESS (В работе)</h4>
-                        <div class="kanban-item">📱 Таргет ВКонтакте</div>
-                        <div class="kanban-item">📱 Посты 2 раза/день</div>
-                        <div class="kanban-item">📧 Рассылка 2-я волна</div>
-                        <div class="kanban-item">📢 Листовки в школах</div>
+                        <h4>🚧 IN PROGRESS</h4>
+                        <div class="kanban-item">📱 Таргет VK</div>
+                        <div class="kanban-item">📱 Посты 2/день</div>
+                        <div class="kanban-item">📧 Рассылка</div>
                     </div>
 
-                    <!-- DONE Column -->
                     <div class="kanban-column">
-                        <h4>✅ DONE (Готово)</h4>
-                        <div class="kanban-item">✅ Сайт готов</div>
-                        <div class="kanban-item">✅ Буклет готов</div>
-                        <div class="kanban-item">✅ Видео снято</div>
-                        <div class="kanban-item">✅ База 2000 родителей</div>
-                        <div class="kanban-item">✅ CRM настроена</div>
+                        <h4>✅ DONE</h4>
+                        <div class="kanban-item">✅ Сайт</div>
+                        <div class="kanban-item">✅ Буклет</div>
+                        <div class="kanban-item">✅ База 2000</div>
                     </div>
-                </div>
-
-                <div style="margin-top: 30px; text-align: center;">
-                    <p style="color: var(--gray);">Обновляйте статус задач по мере выполнения</p>
                 </div>
             </div>
         </div>
+    </main>
 
-        <!-- Footer with emergency plan -->
-        <div style="background: linear-gradient(135deg, #0B1A33, #1a3a5c); padding: 30px; border-radius: 20px; margin-top: 30px;">
-            <h2 style="color: var(--accent); margin-bottom: 20px;">🚨 Экстренный план (если заявок мало)</h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h4>Проблема: Мало просмотров</h4>
-                    <p style="color: var(--accent);">→ Усилить таргет, добавить Reels</p>
-                </div>
-                <div class="card">
-                    <h4>Проблема: Мало переходов</h4>
-                    <p style="color: var(--accent);">→ Добавить CTA, сделать квиз</p>
-                </div>
-                <div class="card">
-                    <h4>Проблема: Мало заявок</h4>
-                    <p style="color: var(--accent);">→ Личные звонки, запустить акции</p>
-                </div>
-                <div class="card">
-                    <h4>Проблема: Мало оплат</h4>
-                    <p style="color: var(--accent);">→ Рассылка напоминаний, рассрочка</p>
-                </div>
-                <div class="card">
-                    <h4>Проблема: Нет прогресса</h4>
-                    <p style="color: var(--accent);">→ Провести очную встречу</p>
-                </div>
-                <div class="card">
-                    <h4>🎁 Быстрые акции</h4>
-                    <p style="color: var(--accent);">"Приведи друга", "Раннее бронирование"</p>
-                </div>
-            </div>
-            <div style="margin-top: 20px; text-align: center;">
-                <p><strong>📞 Экстренный обзвон базы:</strong> День 1: 50 звонков | День 2: ещё 50 | День 3: личная встреча</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- JavaScript - COMPLETE WITH ALL DATA -->
     <script>
-        // Lead progression data
-        const leadTargets = [
-            { week: 1, leads: 50 },
-            { week: 2, leads: 80 },
-            { week: 3, leads: 120 },
-            { week: 4, leads: 160 },
-            { week: 5, leads: 200 },
-            { week: 6, leads: 230 },
-            { week: 7, leads: 260 },
-            { week: 8, leads: 280 },
-            { week: 9, leads: 290 },
-            { week: 10, leads: 295 },
-            { week: 11, leads: 298 },
-            { week: 12, leads: 300 }
-        ];
-
-        // Complete budget data
-        const fullBudget = {
-            'Таргетированная реклама': [50000, 80000, 100000, 80000, 50000, 30000],
-            'Контекстная реклама': [30000, 50000, 60000, 50000, 30000, 20000],
-            'SMM (контент)': [20000, 25000, 30000, 25000, 20000, 15000],
-            'Партнёрские программы': [10000, 20000, 30000, 30000, 20000, 10000],
-            'Офлайн (ТЦ, мероприятия)': [0, 30000, 60000, 50000, 30000, 20000],
-            'Маркетплейсы (комиссия)': [0, 20000, 50000, 80000, 80000, 50000],
-            'Блогеры': [0, 50000, 80000, 60000, 30000, 0],
-            'PR-мероприятия': [0, 20000, 30000, 20000, 10000, 0]
-        };
-
         // Tab switching function
         function switchTab(tabName) {
             // Hide all tabs
@@ -1701,7 +1088,12 @@
                 tab.classList.remove('active');
             });
             
-            // Deactivate all buttons
+            // Deactivate all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Deactivate all tab buttons
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -1709,8 +1101,21 @@
             // Show selected tab
             document.getElementById(`tab-${tabName}`).classList.add('active');
             
-            // Activate clicked button
-            event.target.classList.add('active');
+            // Activate clicked nav item
+            document.querySelector(`.nav-item[data-slide="${tabName}"]`).classList.add('active');
+            
+            // Activate clicked tab button
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            tabButtons.forEach(btn => {
+                if (btn.getAttribute('onclick') === `switchTab('${tabName}')`) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Sidebar toggle
+        function toggleSidebar() {
+            document.querySelector('.nav-sidebar').classList.toggle('collapsed');
         }
 
         // Save checkbox states
@@ -1720,39 +1125,8 @@
             });
         });
 
-        // Calculate budget totals
-        function calculateBudgetTotals() {
-            console.log('✅ Маркетинговый план загружен');
-            console.log('📊 Цель по заявкам: 300 за 12 недель');
-            console.log('💰 Полный бюджет на 6 месяцев: 1,655,000 ₽');
-            
-            // Calculate total from fullBudget
-            let total = 0;
-            for (let category in fullBudget) {
-                total += fullBudget[category].reduce((a, b) => a + b, 0);
-            }
-            console.log(`📈 Общий бюджет всех каналов: ${total.toLocaleString()} ₽`);
-        }
-
-        // Update progress bars based on input (simulated)
-        function updateProgress() {
-            // This would be connected to real data in production
-            const progressBars = document.querySelectorAll('.progress-fill');
-            progressBars.forEach(bar => {
-                if (bar.style.width === '0%') {
-                    // Simulate some progress for demo
-                    if (Math.random() > 0.7) {
-                        bar.style.width = Math.floor(Math.random() * 30) + '%';
-                    }
-                }
-            });
-        }
-
-        // Call functions after load
-        window.addEventListener('load', function() {
-            calculateBudgetTotals();
-            updateProgress();
-        });
+        // Initialize
+        console.log('✅ Маркетинговый план загружен');
     </script>
 </body>
 </html>
