@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -127,6 +126,89 @@
             justify-content: center;
             font-size: 1.2rem;
             z-index: 101;
+        }
+
+        /* Export Button */
+        .export-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: var(--accent);
+            border: none;
+            border-radius: 10px;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            z-index: 101;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s;
+        }
+
+        .export-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Funnel */
+        .funnel {
+            margin: 20px 0;
+        }
+
+        .funnel-step {
+            margin-bottom: 5px;
+        }
+
+        .funnel-bar {
+            height: 45px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-alt));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            font-weight: 600;
+        }
+
+        /* Bar chart */
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 180px;
+            background: rgba(0,0,0,0.2);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .bar-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        .bar {
+            width: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--accent-alt));
+            border-radius: 5px 5px 0 0;
+            margin-top: auto;
+        }
+
+        .bar-label {
+            font-size: 0.7rem;
+            color: var(--gray);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .bar-value {
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
 
         /* Main Content */
@@ -655,10 +737,32 @@
             <div class="nav-item" data-slide="kanban" onclick="switchTab('kanban')">
                 <span class="nav-item-num">10</span>📋 Канбан
             </div>
+            <div class="nav-item" data-slide="weekly" onclick="switchTab('weekly')">
+                <span class="nav-item-num">11</span>📆 Недели
+            </div>
+            <div class="nav-item" data-slide="metrics" onclick="switchTab('metrics')">
+                <span class="nav-item-num">12</span>📊 Метрики
+            </div>
+            <div class="nav-item" data-slide="scenarios" onclick="switchTab('scenarios')">
+                <span class="nav-item-num">13</span>🎯 Сценарии
+            </div>
+            <div class="nav-item" data-slide="campaigns" onclick="switchTab('campaigns')">
+                <span class="nav-item-num">14</span>📣 Кампании
+            </div>
+            <div class="nav-item" data-slide="swot" onclick="switchTab('swot')">
+                <span class="nav-item-num">15</span>🔍 SWOT
+            </div>
+            <div class="nav-item" data-slide="tracking" onclick="switchTab('tracking')">
+                <span class="nav-item-num">16</span>📈 Трекинг
+            </div>
+            <div class="nav-item" data-slide="retargeting" onclick="switchTab('retargeting')">
+                <span class="nav-item-num">17</span>🔄 Ретаргет
+            </div>
         </div>
     </nav>
 
     <button class="nav-toggle" onclick="toggleSidebar()" aria-label="Переключить меню">☰</button>
+    <button class="export-btn" onclick="exportToPDF()" aria-label="Экспорт в PDF">📄 PDF</button>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -709,6 +813,13 @@
             <div class="tab-btn" onclick="switchTab('checklist')">✅ Чек-лист</div>
             <div class="tab-btn" onclick="switchTab('offers')">🎯 Офферы</div>
             <div class="tab-btn" onclick="switchTab('kanban')">📋 Канбан</div>
+            <div class="tab-btn" onclick="switchTab('weekly')">📆 Недели</div>
+            <div class="tab-btn" onclick="switchTab('metrics')">📊 Метрики</div>
+            <div class="tab-btn" onclick="switchTab('scenarios')">🎯 Сценарии</div>
+            <div class="tab-btn" onclick="switchTab('campaigns')">📣 Кампании</div>
+            <div class="tab-btn" onclick="switchTab('swot')">🔍 SWOT</div>
+            <div class="tab-btn" onclick="switchTab('tracking')">📈 Трекинг</div>
+            <div class="tab-btn" onclick="switchTab('retargeting')">🔄 Ретаргет</div>
         </div>
 
         <!-- Tab: Overview -->
