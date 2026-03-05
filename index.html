@@ -692,10 +692,15 @@
         /* Print styles */
         @media print {
             body { background: white; color: black; }
-            .nav-sidebar { display: none; }
-            .main-content { margin-left: 0; max-width: 100%; }
-            .header { background: #f5f5f5; color: black; }
-            .kpi-card { background: #f9f9f9; border: 1px solid #ddd; }
+            .nav-sidebar, .nav-toggle, .export-btn, .tabs { display: none !important; }
+            .main-content { margin-left: 0; max-width: 100%; padding: 0; }
+            .header { background: #f5f5f5 !important; color: black !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .kpi-card { background: #f9f9f9 !important; border: 1px solid #ddd !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .section { background: white !important; border: 1px solid #ddd !important; page-break-inside: avoid; }
+            .tab-pane { display: block !important; page-break-after: always; }
+            .tab-pane:first-child { display: block !important; }
+            .progress-bar, .progress-fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .data-table th { background: #e0e0e0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
@@ -1189,6 +1194,453 @@
                 </div>
             </div>
         </div>
+
+        <!-- Tab: Weekly -->
+        <div id="tab-weekly" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>📆 Недельный график</span></h2>
+                
+                <div class="kpi-grid" style="margin-bottom: 25px;">
+                    <div class="kpi-card highlight">
+                        <div class="kpi-value" style="color: var(--accent);">12</div>
+                        <div class="kpi-label">Недель продаж</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-alt);">300</div>
+                        <div class="kpi-label">Заявок цель</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-purple);">25</div>
+                        <div class="kpi-label">Заявок в неделю</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-teal);">390К</div>
+                        <div class="kpi-label">Бюджет</div>
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">📅 Недельный план</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Нед</th><th>Даты</th><th>Соцсети</th><th>Школы</th><th>Цель</th><th>Бюджет</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>9-15 мар</td><td>Пост-анонс, Сториз</td><td>Письма директорам</td><td>50</td><td>50 000 ₽</td></tr>
+                        <tr><td>2</td><td>16-22 мар</td><td>Посты + отзывы</td><td>Презентации</td><td>80</td><td>60 000 ₽</td></tr>
+                        <tr><td>3</td><td>23-29 мар</td><td>Кейсы, Вебинар</td><td>День открытых дверей</td><td>120</td><td>70 000 ₽</td></tr>
+                        <tr><td>4</td><td>30 мар-5 апр</td><td>Усиление таргета</td><td>Родительские собрания</td><td>160</td><td>80 000 ₽</td></tr>
+                        <tr><td>5</td><td>6-12 апр</td><td>Reels, Опросы</td><td>Классные чаты</td><td>200</td><td>40 000 ₽</td></tr>
+                        <tr><td>6</td><td>13-19 апр</td><td>Отзывы, Видео</td><td>Мастер-классы</td><td>230</td><td>30 000 ₽</td></tr>
+                        <tr><td>7</td><td>20-26 апр</td><td>Акции, Конкурсы</td><td>Выпускные</td><td>260</td><td>30 000 ₽</td></tr>
+                        <tr><td>8</td><td>27 апр-3 мая</td><td>Финиш продаж</td><td>Листовки</td><td>280</td><td>20 000 ₽</td></tr>
+                        <tr><td>9-12</td><td>4-31 мая</td><td>Поддержка</td><td>—</td><td>300</td><td>10 000 ₽</td></tr>
+                        <tr class="total-row">
+                            <td colspan="3"><strong>ИТОГО</strong></td>
+                            <td></td>
+                            <td><strong>300</strong></td>
+                            <td><strong>390 000 ₽</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Metrics -->
+        <div id="tab-metrics" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>📊 Метрики и аналитика</span></h2>
+                
+                <div class="kpi-grid" style="margin-bottom: 25px;">
+                    <div class="kpi-card highlight">
+                        <div class="kpi-value" style="color: var(--accent);">1 300 ₽</div>
+                        <div class="kpi-label">Стоимость лида (CPL)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-alt);">300</div>
+                        <div class="kpi-label">Лидов всего</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-purple);">400%</div>
+                        <div class="kpi-label">ROI</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-teal);">5%+</div>
+                        <div class="kpi-label">Вовлечённость</div>
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">💰 CPL по каналам</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Канал</th><th>Бюджет</th><th>Лиды</th><th>CPL</th><th>Конверсия</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Таргет VK</td><td>120 000 ₽</td><td>100</td><td>1 200 ₽</td><td>33%</td></tr>
+                        <tr><td>Яндекс.Директ</td><td>80 000 ₽</td><td>60</td><td>1 333 ₽</td><td>20%</td></tr>
+                        <tr><td>Блогеры</td><td>50 000 ₽</td><td>20</td><td>2 500 ₽</td><td>7%</td></tr>
+                        <tr><td>Офлайн</td><td>60 000 ₽</td><td>30</td><td>2 000 ₽</td><td>10%</td></tr>
+                        <tr><td>Email</td><td>30 000 ₽</td><td>40</td><td>750 ₽</td><td>13%</td></tr>
+                        <tr><td>SMM органика</td><td>20 000 ₽</td><td>20</td><td>1 000 ₽</td><td>7%</td></tr>
+                        <tr><td>Сарафан</td><td>0 ₽</td><td>30</td><td>0 ₽</td><td>10%</td></tr>
+                        <tr class="total-row"><td><strong>ИТОГО</strong></td><td><strong>360 000 ₽</strong></td><td><strong>300</strong></td><td><strong>1 200 ₽</strong></td><td><strong>100%</strong></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ROI by channel -->
+            <div class="section">
+                <h2 class="section-title"><span>📈 ROI по каналам</span></h2>
+                <div class="bar-chart">
+                    <div class="bar-wrapper"><div class="bar-value">∞</div><div class="bar" style="height: 100%; background: var(--accent-teal);"></div><div class="bar-label">Сарафан</div></div>
+                    <div class="bar-wrapper"><div class="bar-value">500%</div><div class="bar" style="height: 80%;"></div><div class="bar-label">Email</div></div>
+                    <div class="bar-wrapper"><div class="bar-value">400%</div><div class="bar" style="height: 65%; background: var(--accent-alt);"></div><div class="bar-label">VK</div></div>
+                    <div class="bar-wrapper"><div class="bar-value">350%</div><div class="bar" style="height: 55%; background: var(--accent-purple);"></div><div class="bar-label">Директ</div></div>
+                    <div class="bar-wrapper"><div class="bar-value">200%</div><div class="bar" style="height: 30%; background: var(--accent-blue);"></div><div class="bar-label">Офлайн</div></div>
+                    <div class="bar-wrapper"><div class="bar-value">150%</div><div class="bar" style="height: 20%; background: var(--gray);"></div><div class="bar-label">Блогеры</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Scenarios -->
+        <div id="tab-scenarios" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>🎯 Сценарии</span></h2>
+                
+                <div class="grid-3">
+                    <div class="card" style="text-align: center; border: 2px solid var(--accent-red);">
+                        <div class="card-title" style="color: var(--accent-red);">📉 Консервативный</div>
+                        <div class="card-value" style="color: var(--accent-red);">150</div>
+                        <p style="color: var(--gray);">заявок</p>
+                        <hr style="margin: 15px 0; border-color: rgba(255,255,255,0.1);">
+                        <p>Бюджет: <strong>300 000 ₽</strong></p>
+                        <p>Конверсия: <strong>60%</strong></p>
+                        <p>Мест: <strong style="color: var(--accent-red);">90</strong></p>
+                    </div>
+                    <div class="card" style="text-align: center; border: 2px solid var(--accent);">
+                        <div class="card-title" style="color: var(--accent);">📊 Базовый</div>
+                        <div class="card-value" style="color: var(--accent);">300</div>
+                        <p style="color: var(--gray);">заявок</p>
+                        <hr style="margin: 15px 0; border-color: rgba(255,255,255,0.1);">
+                        <p>Бюджет: <strong>390 000 ₽</strong></p>
+                        <p>Конверсия: <strong>83%</strong></p>
+                        <p>Мест: <strong style="color: var(--accent);">250</strong></p>
+                    </div>
+                    <div class="card" style="text-align: center; border: 2px solid var(--accent-alt);">
+                        <div class="card-title" style="color: var(--accent-alt);">📈 Оптимистичный</div>
+                        <div class="card-value" style="color: var(--accent-alt);">400</div>
+                        <p style="color: var(--gray);">заявок</p>
+                        <hr style="margin: 15px 0; border-color: rgba(255,255,255,0.1);">
+                        <p>Бюджет: <strong>450 000 ₽</strong></p>
+                        <p>Конверсия: <strong>90%</strong></p>
+                        <p>Мест: <strong style="color: var(--accent-alt);">280</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget reallocation -->
+            <div class="section">
+                <h2 class="section-title"><span>💰 Перераспределение бюджета</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Сценарий</th><th>VK</th><th>Директ</th><th>Блогеры</th><th>Офлайн</th><th>Email</th><th>Итого</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Базовый</td><td>120К</td><td>80К</td><td>50К</td><td>60К</td><td>30К</td><td>360К</td></tr>
+                        <tr><td>+VK (успех)</td><td>180К</td><td>60К</td><td>40К</td><td>40К</td><td>20К</td><td>360К</td></tr>
+                        <tr><td>+Блогеры (вираль)</td><td>80К</td><td>60К</td><td>120К</td><td>40К</td><td>40К</td><td>360К</td></tr>
+                        <tr><td>Эконом (риск)</td><td>100К</td><td>100К</td><td>20К</td><td>80К</td><td>40К</td><td>360К</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Campaigns -->
+        <div id="tab-campaigns" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>📣 Кампании</span></h2>
+                
+                <h3 class="section-subtitle">📅 Дневной план постов (неделя 1)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>День</th><th>VK</th><th>Telegram</th><th>YouTube</th><th>Сториз</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>ПН</td><td>Пост-анонс старта</td><td>Анонс</td><td>—</td><td>Факт о лагере</td></tr>
+                        <tr><td>ВТ</td><td>Карусель 5 фото</td><td>—</td><td>Shorts 60 сек</td><td>FAQ</td></tr>
+                        <tr><td>СР</td><td>Статья "5 причин"</td><td>Полезный пост</td><td>—</td><td>Отзыв</td></tr>
+                        <tr><td>ЧТ</td><td>Опрос</td><td>—</td><td>Видео-тур</td><td>Конкурс</td></tr>
+                        <tr><td>ПТ</td><td>Видео-приветствие</td><td>Анонс выходных</td><td>—</td><td>Акция</td></tr>
+                        <tr><td>СБ</td><td>Конкурс репостов</td><td>—</td><td>Reels</td><td>Развлекательное</td></tr>
+                        <tr><td>ВС</td><td>Итоги недели</td><td>Рассылка</td><td>Отзывы</td><td>Планы</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Email sequences -->
+            <div class="section">
+                <h2 class="section-title"><span>📧 Email последовательности</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>День</th><th>Триггер</th><th>Тема</th><th>Контент</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>0</td><td>Регистрация</td><td>Добро пожаловать в ИнноСити!</td><td>Знакомство, ссылка на сайт</td></tr>
+                        <tr><td>1</td><td>Не открыл</td><td>Почему выбирают ИнноСити?</td><td>3 преимущества</td></tr>
+                        <tr><td>2</td><td>Не отписался</td><td>Отзывы родителей</td><td>Видео-отзывы</td></tr>
+                        <tr><td>3</td><td>Не отписался</td><td>Что получит ваш ребёнок?</td><td>Программа лагеря</td></tr>
+                        <tr><td>5</td><td>Не отписался</td><td>Осталось X мест!</td><td>У Urgency</td></tr>
+                        <tr><td>7</td><td>Не отписался</td><td>Скидка 10% до конца недели</td><td>Оффер</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Ad creatives -->
+            <div class="section">
+                <h2 class="section-title"><span>🎨 Идеи рекламных креативов</span></h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">🎯 Таргет VK</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Видео "День в лагере" (30 сек)</li>
+                            <li>Карусель "5 дней из жизни"</li>
+                            <li>Статичное фото + текст</li>
+                            <li>Квиз "Узнай свой департамент"</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🔍 Яндекс.Директ</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Поисковые объявления</li>
+                            <li>Рекламные баннеры</li>
+                            <li>Видеореклама</li>
+                            <li>Ретаргетинг на посетителей</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📹 Блогеры</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Обзор лагеря</li>
+                            <li>Интервью с вожатыми</li>
+                            <li>Съёмка смены</li>
+                            <li>Рекомендации</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🏪 Офлайн</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Листовки А5</li>
+                            <li>Баннеры в ТЦ</li>
+                            <li>Стенды в школах</li>
+                            <li>Промо-акции</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: SWOT -->
+        <div id="tab-swot" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>🔍 SWOT-анализ</span></h2>
+                
+                <div class="grid-2">
+                    <div>
+                        <h3 style="color: var(--accent); margin-bottom: 15px;">✅ Сильные стороны (Strengths)</h3>
+                        <div class="card" style="margin-bottom: 10px;">
+                            <ul style="margin-left: 20px; color: var(--gray);">
+                                <li>Уникальный формат "Город для детей"</li>
+                                <li>Обучение предпринимательству</li>
+                                <li>ESG-проекты</li>
+                                <li>Опытные педагоги</li>
+                                <li>Современные программы</li>
+                            </ul>
+                        </div>
+                        
+                        <h3 style="color: var(--accent-alt); margin-bottom: 15px;">⚠️ Слабые стороны (Weaknesses)</h3>
+                        <div class="card">
+                            <ul style="margin-left: 20px; color: var(--gray);">
+                                <li>Новая база</li>
+                                <li>Ограниченная известность</li>
+                                <li>Зависимость от погоды</li>
+                                <li>Высокая конкуренция</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 style="color: var(--accent-teal); margin-bottom: 15px;">🚀 Возможности (Opportunities)</h3>
+                        <div class="card" style="margin-bottom: 10px;">
+                            <ul style="margin-left: 20px; color: var(--gray);">
+                                <li>Рост спроса на STEM</li>
+                                <li>Тренд на активный отдых</li>
+                                <li>Партнёрства со школами</li>
+                                <li>Расширение в другие регионы</li>
+                            </ul>
+                        </div>
+                        
+                        <h3 style="color: var(--accent-red); margin-bottom: 15px;">🚨 Угрозы (Threats)</h3>
+                        <div class="card">
+                            <ul style="margin-left: 20px; color: var(--gray);">
+                                <li>Конкуренты</li>
+                                <li>Экономическая ситуация</li>
+                                <li>Изменение требований</li>
+                                <li>Нехватка персонала</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitor analysis -->
+            <div class="section">
+                <h2 class="section-title"><span>🏆 Конкуренты</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Конкурент</th><th>Цена</th><th>Формат</th><th>Сильные стороны</th><th>Наше преимущество</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>🏕️ Классические лагеря</td><td>10-15К</td><td>Традиционный</td><td>Известность, инфраструктура</td><td>Обучение бизнесу, ESG</td></tr>
+                        <tr><td>🎓 STEM-лагеря</td><td>20-30К</td><td>Технический</td><td>IT-фокус</td><td>Полный комплекс</td></tr>
+                        <tr><td>🌍 Языковые лагеря</td><td>25-40К</td><td>Языки</td><td>Носители языка</td><td>Практика + проекты</td></tr>
+                        <tr><td>🎨 Творческие лагеря</td><td>15-25К</td><td>Творчество</td><td>Артисты</td><td>Предпринимательство</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Tracking -->
+        <div id="tab-tracking" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>📈 Трекинг и KPI</span></h2>
+                
+                <div class="kpi-grid" style="margin-bottom: 25px;">
+                    <div class="kpi-card highlight">
+                        <div class="kpi-value" style="color: var(--accent);">0%</div>
+                        <div class="kpi-label">Выполнение плана</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-alt);">0</div>
+                        <div class="kpi-label">Заявок</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-purple);">0%</div>
+                        <div class="kpi-label">Конверсия</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-value" style="color: var(--accent-teal);">0 ₽</div>
+                        <div class="kpi-label">Бюджет</div>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div>
+                    </div>
+                </div>
+
+                <h3 class="section-subtitle">🎯 Целевые KPI</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Метрика</th><th>Текущее</th><th>Цель</th><th>Выполнение</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Охват VK</td><td>0</td><td>100 000</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                        <tr><td>Охват Telegram</td><td>0</td><td>50 000</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                        <tr><td>Подписчики VK</td><td>0</td><td>5 000</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                        <tr><td>Заявки</td><td>0</td><td>300</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                        <tr><td>Конверсия</td><td>0%</td><td>15%</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                        <tr><td>Стоимость лида</td><td>—</td><td>< 1 500 ₽</td><td><div class="progress-bar"><div class="progress-fill" style="width: 0%"></div></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Daily tracking -->
+            <div class="section">
+                <h2 class="section-title"><span>📅 Ежедневный трекинг</span></h2>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Дата</th><th>Просмотры</th><th>Переходы</th><th>Заявки</th><th>Бюджет</th><th>Комментарий</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>9 мар</td><td>0</td><td>0</td><td>0</td><td>0 ₽</td><td>—</td></tr>
+                        <tr><td>10 мар</td><td>0</td><td>0</td><td>0</td><td>0 ₽</td><td>—</td></tr>
+                        <tr><td>11 мар</td><td>0</td><td>0</td><td>0</td><td>0 ₽</td><td>—</td></tr>
+                        <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tab: Retargeting -->
+        <div id="tab-retargeting" class="tab-pane">
+            <div class="section">
+                <h2 class="section-title"><span>🔄 Ретаргетинг</span></h2>
+                
+                <h3 class="section-subtitle">🎯 Сегменты для ретаргетинга</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr><th>Сегмент</th><th>Источник</th><th>Размер</th><th>Оффер</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Посетили сайт, не оставили заявку</td><td>Сайт</td><td>500</td><td>Скидка 10%</td></tr>
+                        <tr><td>Оставили заявку, не оплатили</td><td>Заявка</td><td>50</td><td>Бесплатная консультация</td></tr>
+                        <tr><td>Отписались от рассылки</td><td>Email</td><td>100</td><td>Полезный контент</td></tr>
+                        <tr><td>Смотрели видео</td><td>YouTube</td><td>200</td><td>Отзывы</td></tr>
+                        <tr><td>Участники опросов</td><td>VK Опрос</td><td>300</td><td>Результат квиза</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Follow-up sequences -->
+            <div class="section">
+                <h2 class="section-title"><span>📋 Follow-up последовательности</span></h2>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">📧 Email follow-up</div>
+                        <table class="data-table" style="margin-top: 10px;">
+                            <tr><td>День 1</td><td>Спасибо за заявку</td></tr>
+                            <tr><td>День 2</td><td>Что включено</td></tr>
+                            <tr><td>День 3</td><td>Отзыв родителя</td></tr>
+                            <tr><td>День 5</td><td>Осталось 3 места</td></tr>
+                            <tr><td>День 7</td><td>Последний день скидки</td></tr>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">📱 SMS/Мессенджер</div>
+                        <table class="data-table" style="margin-top: 10px;">
+                            <tr><td>Через 1 час</td><td>Спасибо! Ждём вас)</td></tr>
+                            <tr><td>Через 24 часа</td><td>У вас есть вопросы?</td></tr>
+                            <tr><td>Через 3 дня</td><td>Забронируйте место!</td></tr>
+                            <tr><td>Через 7 дней</td><td>Осталось 2 места!</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Remarketing ads -->
+            <div class="section">
+                <h2 class="section-title"><span>📺 Ретаргетинг объявления</span></h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">🔴 VK Рекламная сеть</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Баннер "Забронируйте лето"</li>
+                            <li>Видео 15 сек</li>
+                            <li>Карусель с отзывами</li>
+                            <li>Форма заявки</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">🔍 Яндекс.Директ</div>
+                        <ul style="margin-top: 10px; margin-left: 20px; color: var(--gray);">
+                            <li>Баннеры на сайтах</li>
+                            <li>Видеореклама</li>
+                            <li>Динамические объявления</li>
+                            <li>Ретаргетинг</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -1227,6 +1679,11 @@
         // Sidebar toggle
         function toggleSidebar() {
             document.querySelector('.nav-sidebar').classList.toggle('collapsed');
+        }
+
+        // Export to PDF
+        function exportToPDF() {
+            window.print();
         }
 
         // Save checkbox states
