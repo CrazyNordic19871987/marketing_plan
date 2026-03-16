@@ -1,22 +1,116 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
+# Зависимости и пакеты (если вдруг проект разрастется)
+node_modules/
+package-lock.json
+package.json
+
+# Папки с исходными файлами IDE
+.idea/
 .vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+*.sublime-*
+*.sublime-workspace
+*.sublime-project
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Файлы конфигурации локального окружения
+.env
+.env.local
+.env.*.local
+
+# Результаты сборки (если будете минифицировать)
+dist/
+build/
+*.min.js
+*.min.css
+
+# Временные файлы тестирования
+coverage/
+.nyc_output/
+
+# Файлы для печати/экспорта (чтобы не коммитить сгенерированные PDF)
+*.pdf
+*.docx
+*.xlsx
+
+# Бэкапы
+*.bak
+backup/
+backups/
+
+# Локальные настройки Git
+.gitconfig.local
+.gitignore.local
+
+# Папки с медиафайлами (если будут большие изображения/видео)
+/media/
+/assets/videos/
+/assets/images/raw/
+
+# Файлы с персональными данными/паролями
+*secrets*
+*credentials*
+*passwords*
+*config.local*
+
+# Логи ошибок
+error.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Кэш тестов
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Файлы, созданные IDE для локальной истории
+.history/
+
+📋 Что включено и почему:
+1. Системные файлы (ОС)
+.DS_Store — системный файл macOS, который не нужен в репозитории
+
+Thumbs.db — кэш миниатюр Windows
+
+desktop.ini — файл настроек папок Windows
+
+2. Редакторы кода и IDE
+.idea/ — папка с настройками PyCharm/IntelliJ IDEA
+
+.vscode/ — настройки VS Code (если они не общие для команды)
+
+Временные файлы редакторов (.swp, .swo, *~)
+
+3. Сгенерированные файлы
+*.pdf — чтобы случайно не закоммитить экспортированные версии плана
+
+*.log — файлы логов
+
+Папки dist/ и build/ — если в будущем добавите сборку
+
+4. Персональные данные
+.env файлы — если вдруг добавите API ключи для аналитики
+
+Файлы с паролями и credentials
+
+5. Медиафайлы (опционально)
+Заблокированы папки с сырыми медиа, чтобы не засорять репозиторий большими файлами
+
+(Лучше хранить изображения для README отдельно)
+
+💡 Рекомендация
+После добавления .gitignore выполните в терминале:
+
+bash
+git rm -r --cached .
+git add .
+git commit -m "Добавлен .gitignore и очищен кэш Git"
